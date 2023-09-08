@@ -3,6 +3,8 @@ package org.mogwai.wisp.nopepe;
 import ai.onnxruntime.*;
 import org.mogwai.wisp.exceptions.InferenceException;
 import org.mogwai.wisp.exceptions.ModelLoadFailureException;
+import org.mogwai.wisp.models.PepeResult;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,11 +46,11 @@ public class NoPepeModel {
     /**
      * Primary method for image classification, takes preprocessed float image data.
      * @param inputImageData 1D float image data in range <-1.0, 1.0>, the image should be 64*64 RGB
-     * @return true if pepe is detected, false otherwise
+     * @return PepeResult object containing the confidence and the boolean result
      * @throws InferenceException exception thrown when the inference process fails for any reason
      */
-    public boolean isPepe(float[] inputImageData) throws InferenceException {
-        return pepeScore(inputImageData) >= threshold;
+    public PepeResult isPepe(float[] inputImageData) throws InferenceException {
+        return new PepeResult(Float.toString(pepeScore(inputImageData)), pepeScore(inputImageData) >= threshold);
     }
 
     /**

@@ -1,15 +1,16 @@
 package org.mogwai.wisp.nopepe;
 
+import org.mogwai.wisp.models.PepeResult;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 
 public class PepeTester {
-    public static boolean testForPepe(String url) {
-        NoPepeModel nopepe = new NoPepeModel();
+    public static PepeResult testForPepe(String url) {
+        NoPepeModel nopepe = new NoPepeModel(1f);
         try {
             URL input = new URL(url);
             URL res = PepeTester.class.getClassLoader().getResource("nopepe.onnx");
@@ -23,6 +24,6 @@ public class PepeTester {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return new PepeResult("0.0", false);
     }
 }

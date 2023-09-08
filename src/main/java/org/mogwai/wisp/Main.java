@@ -17,7 +17,9 @@ public class Main {
             Mono<Void> printOnLogin = gateway.on(ReadyEvent.class, event ->
                 Mono.fromRunnable(() -> {
                     final User self = event.getSelf();
-                    System.out.printf("Logged in as %s#%s%n", self.getUsername(), self.getDiscriminator());
+                    System.out.println("\n - - - - - READY FOR WORK - - - - -");
+                    System.out.println(" - - - Logged in as " + self.getUsername() + self.getDiscriminator() + " - - -");
+                    System.out.println("  - - - - - - - - - - - - - - - - - \n");
                 })).then();
 
             Mono<Void> handlePingCommand = gateway.on(MessageCreateEvent.class, event -> {
