@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 public class MessageParser {
     public static void parseMessage(Message message) {
 
+        System.out.println("MESSAGE AUTHOR: " + message.getAuthor());
+        System.out.println("MESSAGE CONTENT: " + message.getContent());
         final String content = message.getContent();
         final String emojiPattern = "<:[a-zA-Z0-9_]+:\\d+>";
         final String discordEmojiAddress = "https://cdn.discordapp.com/emojis/";
@@ -19,7 +21,9 @@ public class MessageParser {
 
         if (matcher.find()) {
             extractedId = matcher.group(1);
-            if (PepeTester.testForPepe(discordEmojiAddress + extractedId + ".png")) {
+            String url = discordEmojiAddress + extractedId + ".png";
+            System.out.println("FOUND CUSTOM EMOJI ID: " + url);
+            if (PepeTester.testForPepe(url)) {
                 punishPepe(message);
             }
         }

@@ -28,5 +28,6 @@ public class Main {
 
             return printOnLogin.and(handlePingCommand);
         });
+        login.block();
     }
 }
